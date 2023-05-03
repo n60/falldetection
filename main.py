@@ -7,7 +7,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage,TextSendMessage, ImageSendMessage, StickerSendMessage, LocationSendMessage, QuickReply, QuickReplyButton, MessageAction
 # 載入 json 標準函式庫，處理回傳的資料格式
 import json
-
+import time
 app = Flask(__name__)
 
 @app.route("/", methods=['POST'])
@@ -25,10 +25,11 @@ def linebot():
         msg = json_data['events'][0]['message']['text']      # 取得 LINE 收到的文字訊息
         tk = json_data['events'][0]['replyToken']            # 取得回傳訊息的 Token
         if(msg == "start"):
-          a =  det.fall_detection(0)
+          a =  det.fall_detection(r"50 Ways to Fall.mp4")
+          now = time.localtime()
           message = [
                 TextSendMessage( #傳文字
-                text = "發生跌倒"
+                text = time.strftime('%Y年%m月%d日\n%H時%M分%S秒\n發生跌倒', now)
                 ),
                 ImageSendMessage( #傳圖片
                     original_content_url=a,
