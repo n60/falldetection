@@ -1,3 +1,4 @@
+#This is a test of the detection function without connecting to Line. 
 import pyimgur
 import cv2
 import mediapipe as mp
